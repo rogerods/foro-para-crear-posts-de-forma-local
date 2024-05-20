@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+</head>
+<body>
+    <h1>Inici de sessió</h1>
+<h2>Es recorda que nomès es pot fer el pagament amb PayPal</h2>
+    
+    <!-- Formulario para crear un usuario -->
+    <form id="userForm">
+        <label for="username">Usuari:</label>
+        <input type="text" id="username" required><br><br>
+        
+        <label for="password">Contrassenya:</label>
+        <input type="password" id="password" required><br><br>
+        
+        <button type="submit">Crear Usuario</button>
+    </form>
+    
+    <script>
+        // Función para guardar el usuario en el almacenamiento local
+        function saveUser(username, password) {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push({ username: username, password: password });
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Evento para enviar el formulario de usuario
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            saveUser(username, password);
+            alert("Usuario creado exitosamente.");
+            document.getElementById('userForm').reset();
+        });
+    </script>
+</body>
+</html>

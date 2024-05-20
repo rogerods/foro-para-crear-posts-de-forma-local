@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuaris</title>
+</head>
+<body>
+    <h1>Inicis de sessió</h1>
+    
+    <!-- Contenedor de usuarios -->
+    <div id="users"></div>
+    
+    <script>
+        // Función para cargar y mostrar los usuarios almacenados
+        function loadUsers() {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            let usersContainer = document.getElementById('users');
+            usersContainer.innerHTML = '';
+            if (users.length === 0) {
+                usersContainer.innerHTML = "<p>No hi ha usuaris.</p>";
+            } else {
+                users.forEach(function(user) {
+                    usersContainer.innerHTML += '<h2>' + user.username + '</h2><p>Contrassenya: ' + user.password + '</p><hr>';
+                });
+            }
+        }
+
+        // Cargar y mostrar los usuarios al cargar la página
+        window.onload = function() {
+            loadUsers();
+        };
+    </script>
+</body>
+</html>
