@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cursos</title>
+</head>
+<body>
+    <h1>Crear Curso</h1>
+    
+    <!-- Formulario para crear un curso -->
+    <form id="courseForm">
+        <label for="courseName">Nombre del Curso:</label>
+        <input type="text" id="courseName" required><br><br>
+        
+        <label for="courseDescription">Descripció del curs:</label><br>
+        <textarea id="courseDescription" rows="4" cols="50" required></textarea><br><br>
+        
+        <button type="submit">Crear Curs</button>
+    </form>
+    
+    <script>
+        // Función para guardar el curso en el almacenamiento local
+        function saveCourse(name, description) {
+            let courses = JSON.parse(localStorage.getItem('courses')) || [];
+            courses.push({ name: name, description: description });
+            localStorage.setItem('courses', JSON.stringify(courses));
+        }
+
+        // Evento para enviar el formulario de curso
+        document.getElementById('courseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let name = document.getElementById('courseName').value;
+            let description = document.getElementById('courseDescription').value;
+            saveCourse(name, description);
+            alert("Curs creat exitosament.");
+            document.getElementById('courseForm').reset();
+        });
+    </script>
+</body>
+</html>

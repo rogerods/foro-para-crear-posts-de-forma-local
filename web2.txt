@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Cursos</title>
+</head>
+<body>
+    <h1>Cursos Disponibles</h1>
+    
+    <!-- Contenedor de cursos -->
+    <div id="courses"></div>
+    
+    <script>
+        // Función para cargar y mostrar los cursos almacenados
+        function loadCourses() {
+            let courses = JSON.parse(localStorage.getItem('courses')) || [];
+            let coursesContainer = document.getElementById('courses');
+            coursesContainer.innerHTML = '';
+            if (courses.length === 0) {
+                coursesContainer.innerHTML = "<p>No hay cursos disponibles.</p>";
+            } else {
+                courses.forEach(function(course) {
+                    coursesContainer.innerHTML += '<h2>' + course.name + '</h2><p>' + course.description + '</p><hr>';
+                });
+            }
+        }
+
+        // Cargar y mostrar los cursos al cargar la página
+        window.onload = function() {
+            loadCourses();
+        };
+    </script>
+</body>
+</html>
